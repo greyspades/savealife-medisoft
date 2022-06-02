@@ -1,0 +1,58 @@
+<div class="grid justify-center">
+    <div class="bg-white md:w-[500px] mt-[60px] p-6 rounded-lg shadow-lg h-[450px]">
+        <p class="text-center text-2xl font-bolder">Login</p>
+
+        <form class="mt-[60px]" (submit)="this.submit()" [formGroup]="signupForm">
+           <div class="grid grid-rows-2 gap-8">
+           
+            <mat-form-field appearance="fill"  color="blue">
+                <mat-label>Email address</mat-label>
+                <input
+                matInput
+                type="email"
+                formControlName="email"
+                
+                class="bg-slate-200 w-[70px]"
+                >
+                <mat-error *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+                    <mat-error *ngIf="email?.errors?.['pattern'] ">please enter a valid email address</mat-error>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill"  color="blue">
+                <mat-label>Password</mat-label>
+                <input
+                matInput
+                type={{this.passwordVisible}}
+                formControlName="password"
+                
+                class="bg-slate-200 w-[70px]"
+                >
+                
+                    <mat-icon (click)="togglePassword()" *ngIf="this.passwordVisible=='password'"  matSuffix>visibility_off</mat-icon>
+            
+                    <mat-icon (click)="this.togglePassword()" *ngIf="this.passwordVisible=='text'"  matSuffix>visibility_on</mat-icon>
+
+                <mat-error *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                    <mat-error *ngIf="password?.errors?.['minlength'] ">must be at least 8 characters</mat-error>
+                </mat-error>
+            </mat-form-field>
+           </div>
+
+            <!-- register button -->
+            <div class="grid justify-center mt-[30px] p-5">
+                <button *ngIf="!this.loading" type="submit" [disabled]="!signupForm.valid"
+                    [style.background-color]="signupForm.valid ? 'rgb(51 65 85)' : 'rgb(161 161 170)'"
+                    class="h-[40px] text-white w-[150px] rounded-lg">
+                    Login
+                </button>
+
+                
+                <div *ngIf="this.loading">
+                    <mat-spinner strokeWidth="4" color="blue" class="text-blue-800 w-[60px] h-[60px]"></mat-spinner>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
