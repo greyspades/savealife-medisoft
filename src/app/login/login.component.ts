@@ -61,9 +61,13 @@ export class LoginComponent implements OnInit {
      this.loading=true
     console.log(this.signupForm.value)
     this.user.login(this.signupForm.value)
-    .subscribe((res:LoginResponse)=>{
+    .subscribe((res)=>{
+      let head=res.headers.get("X-Token")
+      console.log(res.headers)
+      console.log(res)
       this.loading=false
-      if(res[0].status=='success'){
+      if(res.body.status=='success'){
+        this.user.toggleLogin(true)
         this.router.navigate(['dashboard'])
       }
     })

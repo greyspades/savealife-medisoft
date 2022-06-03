@@ -5,11 +5,21 @@
 </mat-toolbar>
 <div class="grid justify-center">
 
-    <div class=" relative">
+    <div class=" relative z-0">
 
 
-        <app-note></app-note>
-        <button class="fixed text-center right-6 bottom-6 w-[50px] h-[50px] rounded-full bg-blue-800">
+        <div *ngIf="!this.addNoteOpen && !this.updateNoteOpen">
+            <div *ngFor="let note of this?.notes">
+                <app-note [data]="note"></app-note>
+            </div>
+        </div>
+        <div class="grid justify-center" *ngIf="this?.addNoteOpen">
+            <app-add-note ></app-add-note>
+        </div>
+        <div *ngIf="this?.updateNoteOpen">
+            <app-update-note></app-update-note>
+        </div>
+        <button (click)="this.toggleAddmodal()" class="fixed text-center right-6 bottom-6 w-[50px] h-[50px] rounded-full bg-blue-800">
             <mat-icon class="text-center mt-2 text-white">
                 add
             </mat-icon>

@@ -14,7 +14,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon'
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { NoteComponent } from './note/note.component'
-import {MatDividerModule} from '@angular/material/divider'
+import {MatDividerModule} from '@angular/material/divider';
+import { AddNoteComponent } from './add-note/add-note.component'
+import { CookieService } from 'ngx-cookie-service';
+import { UpdateNoteComponent } from './update-note/update-note.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -23,7 +27,10 @@ import {MatDividerModule} from '@angular/material/divider'
     SignupComponent,
     LoginComponent,
     DashboardComponent,
-    NoteComponent
+    NoteComponent,
+    AddNoteComponent,
+    UpdateNoteComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +46,9 @@ import {MatDividerModule} from '@angular/material/divider'
     MatToolbarModule,
     MatDividerModule
   ],
-  providers: [],
+  providers: [
+    CookieService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-<div class="bg-white p-4 w-[400px] h-[300px] rounded-lg shadow-lg">
+<div class="bg-white z-0 p-4 w-[400px] h-[300px] rounded-lg shadow-lg">
     <p>
         Note
     </p>
@@ -8,7 +8,7 @@
             title
         </small>
         <p class=" font-semibold">
-            Note title
+            {{this.data?.title}}
         </p>
     </div>
     <div class=" h-[120px] rounded-md">
@@ -16,13 +16,18 @@
             Content
         </small>
         <p class="text-start overflow-hidden truncate ...">
-            lorem ipsum bla bla and the rest
+            {{this.data?.content}}
         </p>
     </div>
 <mat-divider></mat-divider>
-    <div class="grid justify-end mt-4">
-        <button class="bg-slate-500 text-white rounded w-[100px] h-[40px] text-center">
-            View
-        </button>
+    <div class="grid justify-end mt-8">
+        <div class="grid justify-items-end grid-cols-2 gap-2">
+            <button (click)="this.update()" class="bg-slate-500 text-white rounded w-[100px] h-[40px] text-center">
+                Update
+            </button>
+            <button (click)="this.delete()" class="bg-black text-white rounded w-[60px] h-[40px] text-center">
+                Delete
+            </button>
+        </div>
     </div>
 </div>

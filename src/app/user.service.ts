@@ -31,6 +31,12 @@ export class UserService {
       return of(result as T);
     };
   }
+
+  loggedIn:boolean=false
+
+  toggleLogin(val:boolean):void {
+    this.loggedIn=val
+  }
   
 
   signUp(user:User):Observable<Response>{
@@ -44,8 +50,8 @@ export class UserService {
     )
   }
 
-  login(user:User):Observable<LoginResponse>{
-    return this.http.post<LoginResponse>('https://note-xyz.herokuapp.com/api/v1/user/login',user)
+  login(user:User):Observable<any>{
+    return this.http.post<any>('https://note-xyz.herokuapp.com/api/v1/user/login/v2',user,{observe: "response"})
     .pipe(
       tap(
         {
