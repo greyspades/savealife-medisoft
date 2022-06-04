@@ -35,6 +35,12 @@ export class NoteComponent implements OnInit {
 
   delete():void {
     this.note.delete(this.data?.id!)
+    .subscribe((res)=>{
+      if(res.status=='success'){
+        alert('Your note has been deleted successfuly')
+        window.location.reload()
+      }
+    })
   }
 
   ngOnInit(): void {

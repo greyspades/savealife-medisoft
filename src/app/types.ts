@@ -55,3 +55,9 @@ export interface NoteResponse {
     data:Note
 }
 
+export interface NoteUpdate {
+    title:string,
+    content:string,
+    id:number
+}
+

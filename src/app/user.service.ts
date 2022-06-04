@@ -4,6 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { Observable,of } from 'rxjs';
 import { User, Response, LoginResponse } from './types';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ import { User, Response, LoginResponse } from './types';
 export class UserService {
 
   constructor(
-    private http:HttpClient
+    private http:HttpClient,
+    private cookie:CookieService
   ) { }
 
   //* error handlers
@@ -34,8 +36,8 @@ export class UserService {
 
   loggedIn:boolean=false
 
-  toggleLogin(val:boolean):void {
-    this.loggedIn=val
+  toggleLogin():void {
+    this.cookie.set('LOGGED_IN','TRUE')
   }
   
 
@@ -51,7 +53,7 @@ export class UserService {
   }
 
   login(user:User):Observable<any>{
-    return this.http.post<any>('https://note-xyz.herokuapp.com/api/v1/user/login/v2',user,{observe: "response"})
+    return this.http.post<any>('https://note-xyz.herokuapp.com/api/v1/user/login/v2',user,{observe: "response",withCredentials:true})
     .pipe(
       tap(
         {

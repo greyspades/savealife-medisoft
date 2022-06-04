@@ -15,6 +15,7 @@ export class AddNoteComponent implements OnInit {
       private cookies:CookieService
   ) { }
 
+//* controls and validates form inputs
   addForm=new FormGroup({
     title:new FormControl('',[
       Validators.minLength(3),
@@ -29,6 +30,7 @@ export class AddNoteComponent implements OnInit {
 
   loading:boolean =false
 
+  //* getters for form input values
   get name(){return this.addForm.get('title')}
 
   get note(){return this.addForm.get('content')}
@@ -37,12 +39,16 @@ export class AddNoteComponent implements OnInit {
     this.notes.toggleAdd(false)
   }
 
+  //* submits a valid form
   submit():void{
     this.loading=true
     this.notes.newNote(this.addForm.value)
     .subscribe((res)=>{
       this.loading=false
-      console.log(res)
+      if(res.status=='success'){
+        alert('Your note has been created successfuly')
+        window.location.reload()
+      }
     })
   }
 

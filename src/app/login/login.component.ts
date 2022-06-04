@@ -4,6 +4,7 @@ import { FormControl, FormBuilder, FormGroup, Validator, Validators, ValidatorFn
 import { UserService } from '../user.service';
 import { Response, LoginResponse } from '../types';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +15,13 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private user:UserService,
-    private router:Router
+    private router:Router,
+    private cookie:CookieService
   ) { }
 
   loading:boolean=false
 
+  //* group for controling and validating form input
   signupForm=new FormGroup({
     email: new FormControl('',[
       Validators.required,
@@ -34,6 +37,7 @@ export class LoginComponent implements OnInit {
 
   passwordVisible:string="password"
 
+  //* toggles the vissibility of the password
   togglePassword():void {
     if(this.passwordVisible=="password"){
       this.passwordVisible='text'
@@ -57,17 +61,14 @@ export class LoginComponent implements OnInit {
   
   get password() { return this.signupForm.get('password'); }
 
+ //* submits a valid form
   submit(){
      this.loading=true
-    console.log(this.signupForm.value)
     this.user.login(this.signupForm.value)
-    .subscribe((res)=>{
-      let head=res.headers.get("X-Token")
-      console.log(res.headers)
-      console.log(res)
+    .subscribe((res)=>{  
       this.loading=false
       if(res.body.status=='success'){
-        this.user.toggleLogin(true)
+        this.user.toggleLogin()
         this.router.navigate(['dashboard'])
       }
     })

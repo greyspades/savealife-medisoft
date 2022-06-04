@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators, ValidatorFn  } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Response } from '../types';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,19 +14,21 @@ import { Response } from '../types';
 export class SignupComponent implements OnInit {
 
   constructor(
-    private user:UserService
+    private user:UserService,
+    private router:Router
   ) { }
 
   loading:boolean=false
 
+  //* controls and validates form input
   signupForm=new FormGroup({
     first_name: new FormControl('',[
       Validators.required,
-      Validators.minLength(4),
+      Validators.minLength(3),
     ]),
     last_name: new FormControl('',[
       Validators.required,
-      Validators.minLength(4),
+      Validators.minLength(3),
     ]),
     email: new FormControl('',[
       Validators.required,
@@ -41,6 +44,7 @@ export class SignupComponent implements OnInit {
 
   passwordVisible:string="password"
 
+  //* toggles password vissibility
   togglePassword():void {
     if(this.passwordVisible=="password"){
       this.passwordVisible='text'
@@ -67,13 +71,16 @@ export class SignupComponent implements OnInit {
   
   get password() { return this.signupForm.get('password'); }
 
+  //* submits a valid form
   submit(){
-    // this.loading=true
-    console.log(this.signupForm.value)
+    this.loading=true
     this.user.signUp(this.signupForm.value)
     .subscribe((res:Response)=>{
       this.loading=false
-      console.log(res)
+      if(res.status=='success'){
+        this.user.toggleLogin()
+        this.router.navigate(['dashboard'])
+      }
     })
   }
   

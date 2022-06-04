@@ -10,6 +10,7 @@ import { Note, NoteResponse } from '../types';
 })
 export class DashboardComponent implements OnInit {
 
+  //* subscription for subjects
   subscription?: Subscription;
 
   constructor(
@@ -22,10 +23,12 @@ export class DashboardComponent implements OnInit {
 
   notes:any=[]
 
+  //* toggles the vissibility of the add notes modal
   toggleAddmodal():void {
     this.note.toggleAdd(true)
   }
 
+  //* subscribes to all subjects in note services
   ngOnInit(): void {
     this.note.getAddState().subscribe((state:boolean)=>{
       this.addNoteOpen=state
@@ -35,6 +38,7 @@ export class DashboardComponent implements OnInit {
     })
     this.note.getNotes().subscribe((res:NoteResponse)=>{
       this.notes=res.data
+    
     })
   }
 
