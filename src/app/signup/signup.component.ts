@@ -78,8 +78,8 @@ export class SignupComponent implements OnInit {
     .subscribe((res:Response)=>{
       this.loading=false
       if(res.status=='success'){
-        this.user.toggleLogin()
-        this.router.navigate(['dashboard'])
+        
+        this.router.navigate(['login'])
       }
     })
   }
