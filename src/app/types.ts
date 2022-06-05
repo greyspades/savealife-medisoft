@@ -19,10 +19,12 @@ export interface Response {
     status: string;
     message: string;
     data: UserResponse;
+    
 }
 
-export interface LoginResponse extends Array<Response> {
-  
+export interface LoginResponse{
+  body:Response,
+  headers:any
 }
 
 export interface FormNote {
@@ -59,5 +61,23 @@ export interface NoteUpdate {
     title:string,
     content:string,
     id:number
+}
+
+export interface NoteArray extends Array<Note> {
+
+}
+
+export interface UpdateResponse {
+    status:string,
+    message:string,
+    has_next:boolean,
+    per_page:number,
+    total:number,
+    data:NoteArray
+}
+
+export interface DeleteResponse {
+    status:string,
+    message:string
 }
 

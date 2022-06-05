@@ -65,9 +65,9 @@ export class LoginComponent implements OnInit {
   submit(){
      this.loading=true
     this.user.login(this.signupForm.value)
-    .subscribe((res)=>{  
+    .subscribe((res:Response)=>{
       this.loading=false
-      if(res.body.status=='success'){
+      if(res.status=='success'){
         this.user.toggleLogin()
         this.router.navigate(['dashboard'])
       }

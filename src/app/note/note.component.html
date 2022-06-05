@@ -7,7 +7,7 @@
         <small>
             title
         </small>
-        <p class=" font-semibold">
+        <p class=" text-lg font-semibold">
             {{this.data?.title}}
         </p>
     </div>
@@ -15,14 +15,15 @@
         <small>
             Content
         </small>
-        <p class="text-start overflow-hidden truncate ...">
+        <p class="text-start overflow-hidden ...">
             {{this.data?.content}}
         </p>
     </div>
-<mat-divider></mat-divider>
+    <mat-divider></mat-divider>
     <div class="grid justify-end mt-4">
-        <div class="grid justify-items-end grid-cols-2 gap-2">
-            <button (click)="this.update()" class="bg-slate-500 text-white rounded w-[100px] h-[40px] text-center">
+        <div class="grid justify-items-end grid-cols-2 ">
+            <button (click)="this.update()"
+                class="bg-slate-500 mr-[-10px] text-white rounded w-[100px] h-[40px] text-center">
                 Update
             </button>
             <button (click)="this.delete()" class="bg-black text-white rounded w-[60px] h-[40px] text-center">

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotesService } from '../notes.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import {FormNote, NoteUpdate } from '../types'
+import {FormNote, NoteUpdate, UpdateResponse } from '../types'
 
 @Component({
   selector: 'app-update-note',
@@ -36,7 +36,6 @@ export class UpdateNoteComponent implements OnInit {
   loading:boolean =false
 
   
-
   //* getters for form inputs
   get name(){return this.addForm.get('title')}
 
@@ -51,10 +50,10 @@ export class UpdateNoteComponent implements OnInit {
   submit():void{
     this.loading=true
     this.notes.update(this.addForm.value,this.id!)
-    .subscribe((res)=>{
+    .subscribe((res:UpdateResponse)=>{
       this.loading=false
       if(res.status=='success'){
-        alert('Your not has been updated successfuly')
+        alert('Your note has been updated successfuly')
         window.location.reload()
       }
     })

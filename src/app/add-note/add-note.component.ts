@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validator, Validators,} from '@angular/forms';
 import { NotesService } from '../notes.service';
 import { CookieService } from 'ngx-cookie-service';
+import { NoteResponse } from '../types';
 
 @Component({
   selector: 'app-add-note',
@@ -43,7 +44,7 @@ export class AddNoteComponent implements OnInit {
   submit():void{
     this.loading=true
     this.notes.newNote(this.addForm.value)
-    .subscribe((res)=>{
+    .subscribe((res:NoteResponse)=>{
       this.loading=false
       if(res.status=='success'){
         alert('Your note has been created successfuly')

@@ -40,7 +40,7 @@ export class UserService {
     this.cookie.set('LOGGED_IN','TRUE')
   }
   
-
+ //* creates a new user
   signUp(user:User):Observable<Response>{
     return this.http.post<Response>('https://note-xyz.herokuapp.com/api/v1/user/',user)
     .pipe(
@@ -52,8 +52,9 @@ export class UserService {
     )
   }
 
-  login(user:User):Observable<any>{
-    return this.http.post<any>('https://note-xyz.herokuapp.com/api/v1/user/login/v2',user,{observe: "response",withCredentials:true})
+//* logs user in
+  login(user:User):Observable<Response>{
+    return this.http.post<Response>('https://note-xyz.herokuapp.com/api/v1/user/login/v2',user,{withCredentials:true})
     .pipe(
       tap(
         {
@@ -63,17 +64,5 @@ export class UserService {
     )
   }
 
-
-//   signUp(user:any):Observable<any>{
-//     return this.http.post<Response>('https://note-xyz.herokuapp.com/api/v1/user/',user)
-//     .pipe(
-//       tap( // Log the result or error
-//       {
-//         next: (data) => console.log(data),
-//         error: (error) => console.log(error)
-//       }
-//       )
-//     );
-//  }
 
 }

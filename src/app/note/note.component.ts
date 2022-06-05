@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NotesService } from '../notes.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Note } from '../types';
+import { DeleteResponse, Note } from '../types';
 
 @Component({
   selector: 'app-note',
@@ -35,7 +35,8 @@ export class NoteComponent implements OnInit {
 
   delete():void {
     this.note.delete(this.data?.id!)
-    .subscribe((res)=>{
+    .subscribe((res:DeleteResponse)=>{
+      
       if(res.status=='success'){
         alert('Your note has been deleted successfuly')
         window.location.reload()

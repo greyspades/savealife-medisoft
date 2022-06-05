@@ -4,52 +4,38 @@
             New Note
         </p>
         <form (submit)="this.submit()" class="grid " [formGroup]="addForm">
-            <mat-form-field class="" appearance="fill"  color="blue">
+            <mat-form-field class="" appearance="fill" color="blue">
                 <mat-label>Description</mat-label>
-                <input
-                matInput
-                type="text"
-                formControlName="title"
-                
-                class="bg-slate-200"
-                >
+                <input matInput type="text" formControlName="title" class="bg-slate-200">
                 <mat-error *ngIf="name?.invalid && (name?.dirty || name?.touched)">
                     <mat-error *ngIf="name?.errors?.['minlength'] ">must be at least 3 characters long</mat-error>
                 </mat-error>
             </mat-form-field>
-
-            <mat-form-field class="" appearance="fill"  color="blue">
+    
+            <mat-form-field class="" appearance="fill" color="blue">
                 <mat-label>Note</mat-label>
-                    <textarea
-                    rows="6"
-                    matInput
-                    type="text"
-                    formControlName="content"
-                    class="bg-slate-200"
-                    >
-                        
-                    </textarea>
+                <textarea rows="6" matInput type="text" formControlName="content" class="bg-slate-200">
+    
+                        </textarea>
                 <mat-error *ngIf="note?.invalid && (note?.dirty || note?.touched)">
                     <mat-error *ngIf="note?.errors?.['minlength'] ">must be at least 3 characters long</mat-error>
                 </mat-error>
             </mat-form-field>
-
+    
             <div class="grid justify-end mt-8">
                 <div class="grid grid-cols-2 ">
                     <button (click)="this.close()" class="w-[70px] rounded-lg h-[40px] bg-slate-200">
                         Cancel
                     </button>
-
-                    <button *ngIf="!this.loading" type="submit" [disabled]="!addForm.valid"
-                    [style.background-color]="addForm.valid ? 'rgb(51 65 85)' : 'rgb(161 161 170)'"
-                    class="h-[40px] text-white w-[150px] rounded-lg">
-                    Add
-                </button>
-
-                
-                <div *ngIf="this.loading">
-                    <mat-spinner diameter="5" strokeWidth="10" color="blue" class="text-blue-800"></mat-spinner>
-                </div>
+    
+                    <button *ngIf="!this?.loading" type="submit" [disabled]="!addForm.valid"
+                        [style.background-color]="addForm.valid ? 'rgb(51 65 85)' : 'rgb(161 161 170)'"
+                        class="h-[40px] text-white w-[150px] rounded-lg">
+                        Add
+                    </button>
+                    <div *ngIf="this?.loading">
+                        <mat-spinner diameter="40" strokeWidth="10" color="blue" class="text-blue-800"></mat-spinner>
+                    </div>
                 </div>
             </div>
         </form>

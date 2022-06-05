@@ -3,7 +3,7 @@ import { Observable,of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
-import {FormNote, Note, NoteResponse, NoteUpdate} from './types'
+import {DeleteResponse, FormNote, Note, NoteResponse, NoteUpdate, UpdateResponse} from './types'
 import { CookieService } from 'ngx-cookie-service';
 
 
@@ -88,8 +88,8 @@ export class NotesService {
   }
 
   //* updates a selected note
-  update(data:NoteUpdate,id:number):Observable<any>{
-    return this.http.put<any>(`https://note-xyz.herokuapp.com/api/v1/note/${id}`,data,{withCredentials:true})
+  update(data:NoteUpdate,id:number):Observable<UpdateResponse>{
+    return this.http.put<UpdateResponse>(`https://note-xyz.herokuapp.com/api/v1/note/${id}`,data,{withCredentials:true})
     .pipe(
       tap(
         {
@@ -100,8 +100,8 @@ export class NotesService {
   }
 
   //* deletes a selected note
-  delete(id:number):Observable<any>{
-    return this.http.delete<any>(`https://note-xyz.herokuapp.com/api/v1/note/${id}`,{withCredentials:true})
+  delete(id:number):Observable<DeleteResponse>{
+    return this.http.delete<DeleteResponse>(`https://note-xyz.herokuapp.com/api/v1/note/${id}`,{withCredentials:true})
     .pipe(
       tap(
         {
